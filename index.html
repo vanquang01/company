@@ -33,7 +33,7 @@
 
         /* Header */
         .header {
-            background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%);
+            background: rgba(255,255,255,0); /* trong suốt */
             color: var(--text-light);
             padding: 0.7rem 0;
             position: fixed;
@@ -41,7 +41,11 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 24px rgba(44,83,100,0.10);
-            transition: background 0.3s;
+            transition: background 0.3s, color 0.3s;
+        }
+        .header.scrolled {
+            background: #fff !important;
+            color: var(--text-dark) !important;
         }
 
         .nav {
@@ -62,6 +66,10 @@
             text-decoration: none;
             letter-spacing: 2px;
             gap: 14px;
+            transition: color 0.3s;
+        }
+        .header.scrolled .logo {
+            color: var(--accent);
         }
 
         .logo img {
@@ -92,6 +100,9 @@
             padding: 8px 18px;
             border-radius: 24px;
             transition: background 0.2s, color 0.2s;
+        }
+        .header.scrolled .nav-links a {
+            color: var(--text-dark);
         }
 
         .nav-links a:hover, .nav-links a:focus {
@@ -541,10 +552,10 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="mainHeader">
         <nav class="nav">
             <a href="#home" class="logo">
-                <img src="company.png" alt="LuminaTech Logo">
+                <img src="logo.png" alt="LuminaTech Logo" style="background: transparent;">
                 <span>LuminaTech</span>
             </a>
             <ul class="nav-links">
@@ -558,13 +569,21 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <img src="company.png" alt="LuminaTech Logo">
-            <h1>LuminaTech</h1>
-            <p>Chuyên gia thiết kế phần mềm hàng đầu Việt Nam</p>
-            <a href="#contact" class="cta-button">Liên hệ ngay</a>
+    <section id="home" class="hero" style="background: linear-gradient(120deg, #10131a 0%, #232b38 100%), url('banner.gif'); background-blend-mode: overlay; background-size: cover, auto; color: #fff; position: relative; overflow: hidden;">
+        <div class="hero-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; position: relative; z-index: 2;">
+            <img src="company.png" alt="LuminaTech Logo" style="border-radius: 50%; box-shadow: 0 4px 32px rgba(0,0,0,0.18); margin-bottom: 1.5rem; border: 4px solid #fff;">
+            <h1 style="font-size: 2.8rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 0.7rem; background: linear-gradient(90deg, #00c6ff, #0072ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">LuminaTech</h1>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 420px; text-align: center; color: #e0e0e0;">
+                Chuyên gia thiết kế phần mềm hàng đầu Việt Nam<br>
+                <span style="font-size: 1rem; color: #b2ebf2;">Đồng hành cùng doanh nghiệp chuyển đổi số</span>
+            </p>
+            <a href="#contact" class="cta-button" style="background: linear-gradient(90deg, #00c6ff, #0072ff); color: #fff; font-weight: 600; border-radius: 30px; padding: 16px 36px; font-size: 1.15rem; box-shadow: 0 2px 12px rgba(0,114,255,0.18); transition: background 0.3s, transform 0.2s;">
+                Nhận báo giá
+            </a>
         </div>
+        <!-- Hiệu ứng background hình tròn mờ -->
+        <div style="position: absolute; top: -80px; left: -80px; width: 300px; height: 300px; background: radial-gradient(circle, #00c6ff55 0%, transparent 70%); z-index: 1;"></div>
+        <div style="position: absolute; bottom: -100px; right: -100px; width: 350px; height: 350px; background: radial-gradient(circle, #0072ff33 0%, transparent 70%); z-index: 1;"></div>
     </section>
 
     <!-- About Section -->
@@ -656,11 +675,11 @@
                     <div class="team-avatar">👨‍💼</div>
                     <h3>Nguyễn Văn Quang</h3>
                     <p>CEO & Founder</p>
-                    <p>10+ năm kinh nghiệm trong lĩnh vực công nghệ</p>
+                    <p>5+ năm kinh nghiệm trong lĩnh vực công nghệ</p>
                 </div>
                 <div class="team-member">
                     <div class="team-avatar">👩‍💻</div>
-                    <h3>Trần Thị Bình</h3>
+                    <h3>Hồ Thị Cẩm Vân</h3>
                     <p>CTO</p>
                     <p>Chuyên gia về kiến trúc phần mềm và AI</p>
                 </div>
@@ -692,15 +711,33 @@
                     <p><strong>Email:</strong> luminatech201@gmail.com</p>
                     <p><strong>Website:</strong> www.luminatech.vn</p>
                     <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 6: 8:00 - 18:00</p>
+                    <p>
+                        <div class="contact-facebook" style="margin-top: 20px;">
+                            <a href="https://www.facebook.com/profile.php?id=61579583094719" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #1877f3; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                                <span style="vertical-align: middle; margin-right: 8px;">📘</span> Nhắn tin qua Facebook
+                            </a>
+                        </div>
+                    </p>
                 </div>
                 <div class="contact-form">
-                    <form>
-                        <input type="text" placeholder="Họ và tên" required>
-                        <input type="email" placeholder="Email" required>
-                        <input type="tel" placeholder="Số điện thoại">
-                        <textarea placeholder="Nội dung tin nhắn" rows="5" required></textarea>
-                        <button type="submit">Gửi tin nhắn</button>
+                    <h2>Liên hệ với chúng tôi</h2>
+                    <form action="https://formspree.io/f/xblkvyez" method="POST" id="contactForm">
+                        <!-- Access Key từ Web3Forms (đăng ký miễn phí tại web3forms.com) -->
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="Liên hệ từ website Lumina Tech">
+                        <input type="hidden" name="from_name" value="Website Contact Form">
+                        
+                        <input type="text" name="name" placeholder="Họ và tên" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="tel" name="phone" placeholder="Số điện thoại">
+                        <textarea name="message" placeholder="Nội dung tin nhắn" rows="5" required></textarea>
+                        
+                        <!-- Honeypot spam protection -->
+                        <input type="checkbox" name="botcheck" style="display: none;">
+                        
+                        <button type="submit" id="submitBtn">Gửi tin nhắn</button>
                     </form>
+                    <div id="responseMessage"></div>
                 </div>
             </div>
         </div>
@@ -724,10 +761,14 @@
             });
         });
 
-        // Form submission
-        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
+        // Header scroll effect: đổi màu header và chữ khi scroll
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('mainHeader');
+            if(window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
     </script>
 </body>
